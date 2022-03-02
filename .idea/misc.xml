@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/batmi/Desktop/LifePointCalculatorApp/app/src/main/res/layout/activity_main.xml" value="0.20572916666666666" />
+        <entry key="..\:/Users/batmi/Desktop/LifePointCalculatorApp/app/src/main/res/layout/fragment_calculator.xml" value="0.20572916666666666" />
+        <entry key="..\:/Users/batmi/Desktop/LifePointCalculatorApp/app/src/main/res/layout/fragment_coin_toss.xml" value="0.20572916666666666" />
+        <entry key="..\:/Users/batmi/Desktop/LifePointCalculatorApp/app/src/main/res/layout/fragment_dice_roll.xml" value="0.20572916666666666" />
+        <entry key="..\:/Users/batmi/Desktop/LifePointCalculatorApp/app/src/main/res/menu/nav_menu.xml" value="0.20572916666666666" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
