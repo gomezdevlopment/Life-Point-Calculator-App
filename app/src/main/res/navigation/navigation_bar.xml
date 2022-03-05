@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_bar"
+    app:startDestination="@id/calculator">
+
+    <fragment
+        android:id="@+id/coinToss"
+        android:name="com.lifepoint.calculator.CoinToss"
+        android:label="fragment_coin_toss"
+        tools:layout="@layout/fragment_coin_toss" />
+    <fragment
+        android:id="@+id/diceRoll"
+        android:name="com.lifepoint.calculator.DiceRoll"
+        android:label="fragment_dice_roll"
+        tools:layout="@layout/fragment_dice_roll" />
+    <fragment
+        android:id="@+id/calculator"
+        android:name="com.lifepoint.calculator.Calculator"
+        android:label="Calculator" />
+</navigation>

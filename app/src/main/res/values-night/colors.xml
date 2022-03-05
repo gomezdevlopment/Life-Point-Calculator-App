@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="windowBG">#212A37</color>
+    <color name="primary">#D900FF</color>
+    <color name="primaryVariant">#932597</color>
+    <color name="calculatorTextColor">#00FF0D</color>
+</resources>

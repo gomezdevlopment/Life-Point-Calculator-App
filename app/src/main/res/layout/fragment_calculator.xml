@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Calculator">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/playerOneLifePoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="85dp"
+            android:fontFamily="@font/liquid_crystal"
+            android:text="4000"
+            android:textColor="@color/calculatorTextColor"
+            android:textSize="100sp"
+            app:layout_constraintBottom_toTopOf="@+id/divider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/playerTwoLifePoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="85dp"
+            android:fontFamily="@font/liquid_crystal"
+            android:text="4000"
+            android:textColor="@color/calculatorTextColor"
+            android:textSize="100sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/playerOneSubtractButton"
+            android:layout_width="75dp"
+            android:layout_height="0dp"
+            android:text="-"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/playerOneAdditionButton"
+            app:layout_constraintStart_toStartOf="@+id/playerOneLifePoints"
+            app:layout_constraintTop_toTopOf="@+id/playerOneAdditionButton" />
+
+        <Button
+            android:id="@+id/playerOneAdditionButton"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="+"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="@+id/playerOneLifePoints"
+            app:layout_constraintTop_toBottomOf="@+id/playerOneLifePoints" />
+
+        <Button
+            android:id="@+id/playerTwoSubtractButton"
+            android:layout_width="75dp"
+            android:layout_height="0dp"
+            android:text="-"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/playerTwoAdditionButton"
+            app:layout_constraintStart_toStartOf="@+id/playerTwoLifePoints"
+            app:layout_constraintTop_toTopOf="@+id/playerTwoAdditionButton" />
+
+        <Button
+            android:id="@+id/playerTwoAdditionButton"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="+"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="@+id/playerTwoLifePoints"
+            app:layout_constraintTop_toBottomOf="@+id/playerTwoLifePoints" />
+
+        <TextView
+            android:id="@+id/playerOneName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="Player One"
+            app:layout_constraintBottom_toTopOf="@+id/playerOneLifePoints"
+            app:layout_constraintEnd_toEndOf="@+id/playerOneLifePoints"
+            app:layout_constraintStart_toStartOf="@+id/playerOneLifePoints" />
+
+        <TextView
+            android:id="@+id/playerTwoName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="Player Two"
+            app:layout_constraintBottom_toTopOf="@+id/playerTwoLifePoints"
+            app:layout_constraintEnd_toEndOf="@+id/playerTwoLifePoints"
+            app:layout_constraintStart_toStartOf="@+id/playerTwoLifePoints" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
