@@ -12,4 +12,7 @@
     <color name="primary">#FF00A2</color>
     <color name="primaryVariant">#953170</color>
     <color name="calculatorTextColor">#0800FF</color>
+
+    <color name="red">#FF0000</color>
+    <color name="green">#00FF37</color>
 </resources>

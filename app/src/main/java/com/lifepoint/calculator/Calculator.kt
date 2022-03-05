@@ -9,8 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import org.w3c.dom.Text
 import java.lang.StringBuilder
+import android.animation.ValueAnimator
+import android.animation.ValueAnimator.AnimatorUpdateListener
+import androidx.core.animation.doOnEnd
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -55,30 +60,34 @@ class Calculator : Fragment() {
         val playerTwoSubtractButton: Button = view.findViewById(R.id.playerTwoSubtractButton)
 
         playerOneAddButton.setOnClickListener {
-            openCalculatorNumberPad(view.context, "playerOne", "add", playerOneLifePoints)
+            openCalculatorNumberPad(view.context, "add", playerOneLifePoints)
         }
 
         playerOneSubtractButton.setOnClickListener {
-            openCalculatorNumberPad(view.context, "playerOne", "subtract", playerOneLifePoints)
+            openCalculatorNumberPad(view.context, "subtract", playerOneLifePoints)
         }
 
         playerTwoAddButton.setOnClickListener {
-            openCalculatorNumberPad(view.context, "playerTwo", "add", playerTwoLifePoints)
+            openCalculatorNumberPad(view.context, "add", playerTwoLifePoints)
         }
 
         playerTwoSubtractButton.setOnClickListener {
-            openCalculatorNumberPad(view.context, "playerTwo", "subtract", playerTwoLifePoints)
+            openCalculatorNumberPad(view.context, "subtract", playerTwoLifePoints)
         }
     }
 
-    private fun openCalculatorNumberPad(context: Context, player: String, function: String, lifePoints: TextView) {
+    private fun openCalculatorNumberPad(
+        context: Context,
+        function: String,
+        lifePoints: TextView
+    ) {
         val dialog = Dialog(context)
         dialog.setContentView(R.layout.calculator_number_pad)
         dialog.show()
 
         var currentLifePoints: Int = Integer.valueOf(lifePoints.text.toString())
 
-        val number: TextView = dialog.findViewById(R.id.number)
+        val numberView: TextView = dialog.findViewById(R.id.number)
 
         val button0: Button = dialog.findViewById(R.id.button0)
         val button00: Button = dialog.findViewById(R.id.button00)
@@ -98,34 +107,57 @@ class Calculator : Fragment() {
             button4, button5, button6, button7, button8, button9
         )
 
-        addButtonListeners(buttons, number)
+        addButtonListeners(buttons, numberView)
 
         val enterButton: Button = dialog.findViewById(R.id.enterButton)
         enterButton.setOnClickListener {
-            if(number.text.isNotBlank()){
-                if(function == "add"){
-                    currentLifePoints += Integer.valueOf(number.text.toString())
-                }else if(function == "subtract"){
-                    currentLifePoints -= Integer.valueOf(number.text.toString())
-                    if(currentLifePoints < 0){
-                        currentLifePoints = 0
-                    }
+
+            var number = 0
+            val color = ContextCompat.getColor(context, R.color.calculatorTextColor)
+
+            if (numberView.text.isNotBlank()) {
+                number = Integer.valueOf(numberView.text.toString())
+            }
+
+            if (function == "add") {
+                currentLifePoints += number
+                dialog.dismiss()
+                //Life Point Animation
+                lifePoints.setTextColor(ContextCompat.getColor(context, R.color.green))
+                lifePointAnimation(lifePoints, currentLifePoints - number, currentLifePoints, color)
+
+            } else if (function == "subtract") {
+                currentLifePoints -= number
+                if (currentLifePoints < 0) {
+                    currentLifePoints = 0
                 }
                 dialog.dismiss()
-                lifePoints.text = currentLifePoints.toString()
-            }else{
-                dialog.dismiss()
+                //Life Point Animation
+                lifePoints.setTextColor(ContextCompat.getColor(context, R.color.red))
+                lifePointAnimation(lifePoints, currentLifePoints + number, currentLifePoints, color)
             }
         }
 
         val clearButton: Button = dialog.findViewById(R.id.clearButton)
         clearButton.setOnClickListener {
-            number.text = ""
+            numberView.text = ""
+        }
+    }
+
+    private fun lifePointAnimation(textView: TextView, startValue: Int, endValue: Int, color: Int) {
+        val animator = ValueAnimator.ofInt(startValue, endValue)
+        animator.duration = 1000
+        animator.addUpdateListener { animation ->
+            textView.text = (animation.animatedValue.toString())
+        }
+        animator.start()
+        animator.doOnEnd {
+            textView.setTextColor(color)
         }
     }
 
     private fun addButtonListeners(buttons: ArrayList<Button>, numberView: TextView) {
-        for(button in buttons){
+        for (button in buttons) {
             button.setOnClickListener {
                 val buttonNumber = button.text
                 numberView.append(buttonNumber)
