@@ -59,6 +59,9 @@ class Calculator : Fragment() {
         val playerTwoAddButton: Button = view.findViewById(R.id.playerTwoAdditionButton)
         val playerTwoSubtractButton: Button = view.findViewById(R.id.playerTwoSubtractButton)
 
+        playerOneLifePoints.text = playerOneLifePointTotal
+        playerTwoLifePoints.text = playerTwoLifePointTotal
+
         playerOneAddButton.setOnClickListener {
             openCalculatorNumberPad(view.context, "add", playerOneLifePoints)
         }
@@ -119,22 +122,32 @@ class Calculator : Fragment() {
                 number = Integer.valueOf(numberView.text.toString())
             }
 
-            if (function == "add") {
-                currentLifePoints += number
-                dialog.dismiss()
-                //Life Point Animation
-                lifePoints.setTextColor(ContextCompat.getColor(context, R.color.green))
-                lifePointAnimation(lifePoints, currentLifePoints - number, currentLifePoints, color)
+            if(number != 0){
+                if (function == "add") {
+                    currentLifePoints += number
+                    if (currentLifePoints >= 999999) {
+                        currentLifePoints = 999999
+                    }
+                    dialog.dismiss()
+                    //Life Point Animation
+                    lifePoints.setTextColor(ContextCompat.getColor(context, R.color.green))
+                    lifePointAnimation(lifePoints, currentLifePoints - number, currentLifePoints, color)
 
-            } else if (function == "subtract") {
-                currentLifePoints -= number
-                if (currentLifePoints < 0) {
-                    currentLifePoints = 0
+                } else if (function == "subtract") {
+                    currentLifePoints -= number
+                    if (currentLifePoints < 0) {
+                        currentLifePoints = 0
+                    }
+                    dialog.dismiss()
+                    //Life Point Animation
+                    lifePoints.setTextColor(ContextCompat.getColor(context, R.color.red))
+                    lifePointAnimation(lifePoints, currentLifePoints + number, currentLifePoints, color)
                 }
-                dialog.dismiss()
-                //Life Point Animation
-                lifePoints.setTextColor(ContextCompat.getColor(context, R.color.red))
-                lifePointAnimation(lifePoints, currentLifePoints + number, currentLifePoints, color)
+            }
+            if(lifePoints.id == R.id.playerOneLifePoints){
+                playerOneLifePointTotal = currentLifePoints.toString()
+            }else{
+                playerTwoLifePointTotal = currentLifePoints.toString()
             }
         }
 
@@ -160,12 +173,17 @@ class Calculator : Fragment() {
         for (button in buttons) {
             button.setOnClickListener {
                 val buttonNumber = button.text
-                numberView.append(buttonNumber)
+                //Limit calculator function to 6 digits
+                if(numberView.length() + buttonNumber.length <= 6){
+                    numberView.append(buttonNumber)
+                }
             }
         }
     }
 
     companion object {
+        var playerOneLifePointTotal: String = "8000"
+        var playerTwoLifePointTotal: String = "8000"
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.

@@ -19,8 +19,8 @@
             android:textColor="@color/calculatorTextColor"
             android:textSize="100sp"
             app:layout_constraintBottom_toTopOf="@+id/divider"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/playerOneAdditionButton"
+            app:layout_constraintStart_toStartOf="@+id/playerOneSubtractButton"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -51,21 +51,23 @@
             android:id="@+id/playerOneSubtractButton"
             android:layout_width="75dp"
             android:layout_height="0dp"
+            android:layout_marginEnd="30dp"
             android:text="-"
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/playerOneAdditionButton"
-            app:layout_constraintStart_toStartOf="@+id/playerOneLifePoints"
+            app:layout_constraintEnd_toStartOf="@+id/divider2"
             app:layout_constraintTop_toTopOf="@+id/playerOneAdditionButton" />
 
         <Button
             android:id="@+id/playerOneAdditionButton"
             android:layout_width="75dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
             android:text="+"
             android:textSize="30sp"
-            app:layout_constraintEnd_toEndOf="@+id/playerOneLifePoints"
+            app:layout_constraintStart_toEndOf="@+id/divider2"
             app:layout_constraintTop_toBottomOf="@+id/playerOneLifePoints" />
 
         <Button
@@ -76,7 +78,7 @@
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/playerTwoAdditionButton"
-            app:layout_constraintStart_toStartOf="@+id/playerTwoLifePoints"
+            app:layout_constraintStart_toStartOf="@+id/playerOneSubtractButton"
             app:layout_constraintTop_toTopOf="@+id/playerTwoAdditionButton" />
 
         <Button
@@ -86,7 +88,7 @@
             android:layout_marginTop="20dp"
             android:text="+"
             android:textSize="30sp"
-            app:layout_constraintEnd_toEndOf="@+id/playerTwoLifePoints"
+            app:layout_constraintEnd_toEndOf="@+id/playerOneAdditionButton"
             app:layout_constraintTop_toBottomOf="@+id/playerTwoLifePoints" />
 
         <TextView
@@ -108,6 +110,17 @@
             app:layout_constraintBottom_toTopOf="@+id/playerTwoLifePoints"
             app:layout_constraintEnd_toEndOf="@+id/playerTwoLifePoints"
             app:layout_constraintStart_toStartOf="@+id/playerTwoLifePoints" />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
