@@ -14,6 +14,7 @@ import org.w3c.dom.Text
 import java.lang.StringBuilder
 import android.animation.ValueAnimator
 import android.animation.ValueAnimator.AnimatorUpdateListener
+import android.media.MediaPlayer
 import androidx.core.animation.doOnEnd
 
 
@@ -21,6 +22,7 @@ import androidx.core.animation.doOnEnd
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+private var soundFX: MediaPlayer? = null
 
 
 /**
@@ -158,14 +160,18 @@ class Calculator : Fragment() {
     }
 
     private fun lifePointAnimation(textView: TextView, startValue: Int, endValue: Int, color: Int) {
+        soundFX = MediaPlayer.create(textView.context, R.raw.point_change_sound_fx)
         val animator = ValueAnimator.ofInt(startValue, endValue)
         animator.duration = 1000
         animator.addUpdateListener { animation ->
             textView.text = (animation.animatedValue.toString())
         }
         animator.start()
+        soundFX?.start()
         animator.doOnEnd {
             textView.setTextColor(color)
+            soundFX?.stop()
+            soundFX?.release()
         }
     }
 
