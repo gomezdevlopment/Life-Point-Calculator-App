@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
+import org.w3c.dom.Text
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -46,22 +48,35 @@ class CoinToss : Fragment() {
 
         val coinTossResult: TextView = view.findViewById(R.id.coinTossResult)
         val flipCoinButton: Button = view.findViewById(R.id.flipCoinButton)
+        val coinImage: ImageView = view.findViewById(R.id.coinImage)
 
         flipCoinButton.setOnClickListener {
-            if(soundFX!=null){
-                soundFX?.release()
-            }
-            soundFX = MediaPlayer.create(view.context, R.raw.coin_sound_fx_1)
-            soundFX?.start()
-            var result: String = "Heads"
-
-            //Basic Coin Toss Logic - Random number between 0 and 1
-            val randomNumber: Int = (0..1).random()
-            if(randomNumber == 1){
-                result = "Tails"
-            }
-            coinTossResult.text = result
+            flipCoin(coinImage, flipCoinButton, coinTossResult)
         }
+    }
+
+    private fun flipCoin(coin: ImageView, button: Button, textView: TextView){
+        soundFX = MediaPlayer.create(view?.context, R.raw.coin_sound_fx_1)
+        soundFX?.start()
+        var result = "Heads"
+        var resultImage = R.drawable.ic_heads
+        //Basic Coin Toss Logic - Random number between 0 and 1
+        val randomNumber: Int = (0..1).random()
+        if(randomNumber == 1){
+            result = "Tails"
+            resultImage = R.drawable.ic_tails
+        }
+        coin.animate().apply {
+            duration = 500
+            rotationXBy(1800f)
+            button.isClickable = false
+        }.withEndAction{
+            coin.setImageResource(resultImage)
+            textView.text = result
+            soundFX?.stop()
+            soundFX?.release()
+            button.isClickable = true
+        }.start()
     }
 
     companion object {
