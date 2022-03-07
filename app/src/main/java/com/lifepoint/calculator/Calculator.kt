@@ -118,7 +118,7 @@ class Calculator : Fragment() {
         enterButton.setOnClickListener {
 
             var number = 0
-            val color = ContextCompat.getColor(context, R.color.calculatorTextColor)
+            var color = ContextCompat.getColor(context, R.color.calculatorTextColor)
 
             if (numberView.text.isNotBlank()) {
                 number = Integer.valueOf(numberView.text.toString())
@@ -137,8 +137,9 @@ class Calculator : Fragment() {
 
                 } else if (function == "subtract") {
                     currentLifePoints -= number
-                    if (currentLifePoints < 0) {
+                    if (currentLifePoints <= 0) {
                         currentLifePoints = 0
+                        color = ContextCompat.getColor(context, R.color.red)
                     }
                     dialog.dismiss()
                     //Life Point Animation
