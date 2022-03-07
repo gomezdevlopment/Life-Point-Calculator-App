@@ -1,5 +1,6 @@
 package com.lifepoint.calculator
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import android.widget.TextView
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+private var soundFX: MediaPlayer? = null
 
 /**
  * A simple [Fragment] subclass.
@@ -46,9 +48,15 @@ class DiceRoll : Fragment() {
         val rollDiceButton: Button = view.findViewById(R.id.rollDiceButton)
 
         rollDiceButton.setOnClickListener {
+            if(soundFX!=null){
+                soundFX?.release()
+            }
+            soundFX = MediaPlayer.create(view.context, R.raw.dice_sound_fx)
+            soundFX?.start()
             //Basic Dice Roll Logic - Random number in range 1..6
             val randomNumber: Int = (1..6).random()
             diceRollResult.text = randomNumber.toString()
+
         }
     }
 
