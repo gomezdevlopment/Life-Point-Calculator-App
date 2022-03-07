@@ -8,12 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
-private var soundFX: MediaPlayer? = null
+private var sound: MediaPlayer? = null
+private var soundFX: Boolean = true
 
 /**
  * A simple [Fragment] subclass.
@@ -44,15 +46,21 @@ class DiceRoll : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val preferences = activity?.getSharedPreferences("preferences", AppCompatActivity.MODE_PRIVATE)
+        soundFX = preferences?.getBoolean("soundFX", true) == true
+
         val diceRollResult: TextView = view.findViewById(R.id.diceRollResult)
         val rollDiceButton: Button = view.findViewById(R.id.rollDiceButton)
 
         rollDiceButton.setOnClickListener {
-            if(soundFX!=null){
-                soundFX?.release()
+            if(sound!=null){
+                sound?.stop()
+                sound?.release()
             }
-            soundFX = MediaPlayer.create(view.context, R.raw.dice_sound_fx)
-            soundFX?.start()
+            if(soundFX){
+                sound = MediaPlayer.create(view.context, R.raw.dice_sound_fx)
+                sound?.start()
+            }
             //Basic Dice Roll Logic - Random number in range 1..6
             val randomNumber: Int = (1..6).random()
             diceRollResult.text = randomNumber.toString()

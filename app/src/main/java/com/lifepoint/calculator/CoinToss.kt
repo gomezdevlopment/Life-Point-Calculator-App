@@ -9,13 +9,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import org.w3c.dom.Text
+import androidx.appcompat.app.AppCompatActivity
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
-private var soundFX: MediaPlayer? = null
+private var sound: MediaPlayer? = null
+private var soundFX: Boolean = true
 
 /**
  * A simple [Fragment] subclass.
@@ -46,6 +47,9 @@ class CoinToss : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val preferences = activity?.getSharedPreferences("preferences", AppCompatActivity.MODE_PRIVATE)
+        soundFX = preferences?.getBoolean("soundFX", true) == true
+
         val coinTossResult: TextView = view.findViewById(R.id.coinTossResult)
         val flipCoinButton: Button = view.findViewById(R.id.flipCoinButton)
         val coinImage: ImageView = view.findViewById(R.id.coinImage)
@@ -56,8 +60,10 @@ class CoinToss : Fragment() {
     }
 
     private fun flipCoin(coin: ImageView, button: Button, textView: TextView){
-        soundFX = MediaPlayer.create(view?.context, R.raw.coin_sound_fx_1)
-        soundFX?.start()
+        if(soundFX){
+            sound = MediaPlayer.create(view?.context, R.raw.coin_sound_fx_1)
+            sound?.start()
+        }
         var result = "Heads"
         var resultImage = R.drawable.ic_heads
         //Basic Coin Toss Logic - Random number between 0 and 1
@@ -73,8 +79,10 @@ class CoinToss : Fragment() {
         }.withEndAction{
             coin.setImageResource(resultImage)
             textView.text = result
-            soundFX?.stop()
-            soundFX?.release()
+            if(sound!=null){
+                sound?.stop()
+                sound?.release()
+            }
             button.isClickable = true
         }.start()
     }

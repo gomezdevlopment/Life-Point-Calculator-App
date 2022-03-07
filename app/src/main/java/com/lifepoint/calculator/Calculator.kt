@@ -10,11 +10,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import org.w3c.dom.Text
-import java.lang.StringBuilder
 import android.animation.ValueAnimator
-import android.animation.ValueAnimator.AnimatorUpdateListener
 import android.media.MediaPlayer
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
 
 
@@ -22,8 +20,8 @@ import androidx.core.animation.doOnEnd
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
-private var soundFX: MediaPlayer? = null
-
+private var sound: MediaPlayer? = null
+private var soundFX: Boolean = true
 
 /**
  * A simple [Fragment] subclass.
@@ -53,6 +51,9 @@ class Calculator : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val preferences = activity?.getSharedPreferences("preferences", AppCompatActivity.MODE_PRIVATE)
+        soundFX = preferences?.getBoolean("soundFX", true) == true
 
         val playerOneLifePoints: TextView = view.findViewById(R.id.playerOneLifePoints)
         val playerTwoLifePoints: TextView = view.findViewById(R.id.playerTwoLifePoints)
@@ -161,18 +162,22 @@ class Calculator : Fragment() {
     }
 
     private fun lifePointAnimation(textView: TextView, startValue: Int, endValue: Int, color: Int) {
-        soundFX = MediaPlayer.create(textView.context, R.raw.point_change_sound_fx)
+        if(soundFX){
+            sound = MediaPlayer.create(textView.context, R.raw.point_change_sound_fx)
+            sound?.start()
+        }
         val animator = ValueAnimator.ofInt(startValue, endValue)
         animator.duration = 1000
         animator.addUpdateListener { animation ->
             textView.text = (animation.animatedValue.toString())
         }
         animator.start()
-        soundFX?.start()
         animator.doOnEnd {
             textView.setTextColor(color)
-            soundFX?.stop()
-            soundFX?.release()
+            if(sound!=null){
+                sound?.stop()
+                sound?.release()
+            }
         }
     }
 
