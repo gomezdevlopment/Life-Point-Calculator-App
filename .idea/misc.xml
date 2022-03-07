@@ -3,12 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/batmi/Desktop/LifePointCalculatorApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.21979166666666666" />
         <entry key="..\:/Users/batmi/Desktop/LifePointCalculatorApp/app/src/main/res/drawable/ic_coin.xml" value="0.16019736842105264" />
         <entry key="..\:/Users/batmi/Desktop/LifePointCalculatorApp/app/src/main/res/drawable/ic_tails.xml" value="0.15822368421052632" />
         <entry key="..\:/Users/batmi/Desktop/LifePointCalculatorApp/app/src/main/res/layout-land/fragment_calculator.xml" value="0.22" />
         <entry key="..\:/Users/batmi/Desktop/LifePointCalculatorApp/app/src/main/res/layout/activity_main.xml" value="0.20572916666666666" />
         <entry key="..\:/Users/batmi/Desktop/LifePointCalculatorApp/app/src/main/res/layout/calculator_number_pad.xml" value="0.25" />
-        <entry key="..\:/Users/batmi/Desktop/LifePointCalculatorApp/app/src/main/res/layout/fragment_calculator.xml" value="0.33" />
+        <entry key="..\:/Users/batmi/Desktop/LifePointCalculatorApp/app/src/main/res/layout/fragment_calculator.xml" value="0.1" />
         <entry key="..\:/Users/batmi/Desktop/LifePointCalculatorApp/app/src/main/res/layout/fragment_coin_toss.xml" value="0.20572916666666666" />
         <entry key="..\:/Users/batmi/Desktop/LifePointCalculatorApp/app/src/main/res/layout/fragment_dice_roll.xml" value="0.20572916666666666" />
         <entry key="..\:/Users/batmi/Desktop/LifePointCalculatorApp/app/src/main/res/layout/fragment_menu.xml" value="0.25" />

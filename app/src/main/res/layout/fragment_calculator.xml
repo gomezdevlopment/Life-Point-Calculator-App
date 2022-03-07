@@ -96,7 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:text="Player One"
+            android:text="@string/player_one"
             app:layout_constraintBottom_toTopOf="@+id/playerOneLifePoints"
             app:layout_constraintEnd_toEndOf="@+id/playerOneLifePoints"
             app:layout_constraintStart_toStartOf="@+id/playerOneLifePoints" />
@@ -106,7 +106,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:text="Player Two"
+            android:text="@string/player_two"
             app:layout_constraintBottom_toTopOf="@+id/playerTwoLifePoints"
             app:layout_constraintEnd_toEndOf="@+id/playerTwoLifePoints"
             app:layout_constraintStart_toStartOf="@+id/playerTwoLifePoints" />
@@ -126,7 +126,7 @@
             android:id="@+id/resetButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reset"
+            android:text="@string/reset"
             app:layout_constraintBottom_toBottomOf="@+id/divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/divider"

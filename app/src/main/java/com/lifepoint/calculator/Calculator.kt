@@ -11,9 +11,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import android.animation.ValueAnimator
-import android.content.DialogInterface
 import android.media.MediaPlayer
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -22,10 +20,6 @@ private var sound: MediaPlayer? = null
 private var soundFX: Boolean = true
 
 class Calculator : Fragment() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
