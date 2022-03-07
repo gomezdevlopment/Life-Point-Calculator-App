@@ -11,9 +11,12 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import android.animation.ValueAnimator
+import android.content.DialogInterface
 import android.media.MediaPlayer
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 private var sound: MediaPlayer? = null
 private var soundFX: Boolean = true
@@ -44,6 +47,7 @@ class Calculator : Fragment() {
         val playerOneSubtractButton: Button = view.findViewById(R.id.playerOneSubtractButton)
         val playerTwoAddButton: Button = view.findViewById(R.id.playerTwoAdditionButton)
         val playerTwoSubtractButton: Button = view.findViewById(R.id.playerTwoSubtractButton)
+        val resetButton: Button = view.findViewById(R.id.resetButton)
 
         playerOneLifePoints.text = playerOneLifePointTotal
         playerTwoLifePoints.text = playerTwoLifePointTotal
@@ -62,6 +66,26 @@ class Calculator : Fragment() {
 
         playerTwoSubtractButton.setOnClickListener {
             openCalculatorNumberPad(view.context, "subtract", playerTwoLifePoints)
+        }
+
+        resetButton.setOnClickListener {
+            val builder = MaterialAlertDialogBuilder(view.context)
+            builder.setTitle("Reset game")
+            builder.setMessage("Are you sure you want to start a new game?")
+                // if the dialog is cancelable
+                .setCancelable(false)
+                .setPositiveButton("Yes") { dialog, _ ->
+                    playerOneLifePointTotal = "8000"
+                    playerTwoLifePointTotal = "8000"
+                    playerOneLifePoints.text = playerOneLifePointTotal
+                    playerTwoLifePoints.text = playerTwoLifePointTotal
+                    dialog.dismiss()
+                }.setNegativeButton("No") {dialog, _ ->
+                    dialog.dismiss()
+                }
+
+            val alert = builder.create()
+            alert.show()
         }
     }
 
