@@ -19,4 +19,9 @@
         android:id="@+id/calculator"
         android:name="com.lifepoint.calculator.Calculator"
         android:label="Calculator" />
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.lifepoint.calculator.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" />
 </navigation>
